@@ -1,7 +1,7 @@
 {
   "name": "versozap-sender",
   "version": "1.0.0",
-  "description": "Serviço de envio de mensagens via WhatsApp com Venom",
+  "description": "Serviço de envio de mensagens do VersoZap via WhatsApp",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -18,3 +18,4 @@
   "author": "Bruno Sandri",
   "license": "MIT"
 }
+
