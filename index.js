@@ -9,17 +9,28 @@ let client = null;
 venom
   .create({
     session: 'versozap',
-    headless: false,
-    executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', // caminho do seu Chromec:
+    multidevice: true,
+    headless: true
   })
   .then((cli) => {
     client = cli;
     console.log('✅ Conectado ao WhatsApp!');
+
+    // Agora é seguro usar o client
+    client.onMessage((message) => {
+      if (message.isGroupMsg) return;
+      if (!message.body.toLowerCase().startsWith('versozap')) return;
+      console.log("Mensagem relevante recebida:", message.body);
+    });
   })
   .catch((error) => {
     console.error('Erro ao conectar com o WhatsApp:', error);
   });
-// Rota para enviar mensagem
+
+app.get('/', (req, res) => {
+  res.send('VersoZap Sender está rodando!');
+});
+
 app.post('/enviar', async (req, res) => {
   const { telefone, mensagem } = req.body;
 
@@ -35,17 +46,8 @@ app.post('/enviar', async (req, res) => {
   }
 });
 
-client.onMessage((message) => {
-  // Ignora mensagens de grupos
-  if (message.isGroupMsg) return;
-
-  // Ignora mensagens que não sejam comandos
-  if (!message.body.toLowerCase().startsWith('versozap')) return;
-
-  // Processa comandos
-  console.log("Mensagem relevante recebida:", message.body);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${port}`);
 });
 
-app.listen(3000, () => {
-  console.log('Servidor de envio rodando em http://localhost:3000');
-});
