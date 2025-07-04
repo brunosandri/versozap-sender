@@ -35,6 +35,17 @@ app.post('/enviar', async (req, res) => {
   }
 });
 
+client.onMessage((message) => {
+  // Ignora mensagens de grupos
+  if (message.isGroupMsg) return;
+
+  // Ignora mensagens que não sejam comandos
+  if (!message.body.toLowerCase().startsWith('versozap')) return;
+
+  // Processa comandos
+  console.log("Mensagem relevante recebida:", message.body);
+});
+
 app.listen(3000, () => {
   console.log('Servidor de envio rodando em http://localhost:3000');
 });
