@@ -1,0 +1,26 @@
+# Node.js
+node_modules/
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Venom
+tokens/
+session/
+session-*/*
+venom/*
